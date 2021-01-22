@@ -1,11 +1,12 @@
 import { lazy, Suspense } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import NotFound from "./components/NotFound";
+import Footer from "../Footer";
+import Header from "../Header";
+import NotFound from "../NotFound";
+import './index.scss'
 
-const HomePage = lazy(() => import("./features/Home"));
-const ProductFeature = lazy(() => import("./features/Product"));
+const HomePage = lazy(() => import("../../features/Home"));
+const ProductFeature = lazy(() => import("../../features/Product"));
 function App() {
 	const match = useRouteMatch();
 	return (

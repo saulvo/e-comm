@@ -1,0 +1,252 @@
+.header {
+	&__top {
+		background-color: #1e1e27;
+		&-left {
+			display: flex;
+			align-items: center;
+
+			height: 3.125rem;
+			width: 100%;
+
+			font-size: 0.8125rem;
+			text-transform: uppercase;
+
+			color: #b5aec4;
+		}
+		&-right {
+			text-align: right;
+		}
+	}
+
+	.language {
+		display: inline-block;
+		position: relative;
+		min-width: 7rem;
+		border-right: solid 1px #333;
+		padding: 0 1.2rem;
+		margin-left: auto;
+		text-align: center;
+		vertical-align: middle;
+
+		> a {
+			display: block;
+			color: #b5aec4;
+			height: 3.125rem;
+			line-height: 3.125rem;
+			font-size: 0.8125rem;
+		}
+		&__selection {
+			list-style: none;
+			display: block;
+			position: absolute;
+			right: 0;
+			top: 120%;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			background-color: #fff;
+			visibility: hidden;
+			opacity: 1;
+			z-index: 1;
+			box-shadow: 0 0 1.5625rem rgba(63, 78, 100, 0.15);
+			transition: all 0.2s ease;
+			> li {
+				padding: 0 1rem;
+				line-height: 3.125rem;
+				> a {
+					display: block;
+					color: #232530;
+					border-bottom: solid 1px #ddd;
+					font-size: 0.8125rem;
+
+					&:hover {
+						color: #b5aec4;
+					}
+				}
+				&:last-child {
+					> a {
+						border-bottom: none;
+					}
+				}
+			}
+		}
+		&:hover {
+			.language__selection {
+				visibility: visible;
+				opacity: 1;
+				top: 100%;
+			}
+		}
+	}
+
+	.account {
+		display: inline-block;
+		position: relative;
+		min-width: 7rem;
+		border-right: solid 1px #333;
+		padding: 0 1.2rem;
+		margin-left: auto;
+		text-align: center;
+		vertical-align: middle;
+
+		> a {
+			display: block;
+			color: #b5aec4;
+			height: 3.125rem;
+			line-height: 3.125rem;
+			font-size: 0.8125rem;
+		}
+		&__selection {
+			list-style: none;
+			display: block;
+			position: absolute;
+			right: 0;
+			top: 120%;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			background-color: #fff;
+			visibility: hidden;
+			opacity: 1;
+			z-index: 1;
+			box-shadow: 0 0 1.5625rem rgba(63, 78, 100, 0.15);
+			transition: all 0.2s ease;
+
+			> li {
+				padding: 0 1rem;
+				line-height: 3.125rem;
+				> a {
+					display: block;
+					color: #232530;
+					border-bottom: solid 1px #ddd;
+					font-size: 0.8125rem;
+
+					svg {
+						margin-right: 0.5rem;
+					}
+					&:hover {
+						color: #b5aec4;
+					}
+				}
+				&:last-child {
+					> a {
+						border-bottom: none;
+					}
+				}
+			}
+		}
+		&:hover {
+			.account__selection {
+				visibility: visible;
+				opacity: 1;
+				top: 100%;
+			}
+		}
+	}
+
+	&__bot {
+		background-color: #fff;
+		box-shadow: 0 0 1rem rgba(#fff, 0.15);
+		&-container {
+			position: relative;
+			height: 6.25rem;
+		}
+	}
+
+	.logo {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		z-index: 9;
+		transform: translateY(-50%);
+		> a {
+			font-size: 1.5rem;
+			color: #1e1e27;
+			font-weight: bold;
+			text-transform: uppercase;
+			> span {
+				color: #fe4c50;
+			}
+		}
+	}
+
+	.navbar {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    height: 100%;
+		&__menu {
+      margin: 0;
+      padding: 0;
+			> li {
+				display: inline-block;
+				> a {
+					display: block;
+					color: #1e1e27;
+					font-size: 0.8125rem;
+					font-weight: 500;
+					text-transform: uppercase;
+					padding: 1.25rem;
+          transition: all 0.2s;
+          &:hover {
+            color: #b5aec4;
+          }
+				}
+			}
+		}
+		&__user {
+      margin:0 0 0 2.1875rem;
+      padding: 0;
+			> li {
+				display: inline-block;
+				text-align: center;
+				> a {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					width: 2.5rem;
+					height: 2.5rem;
+
+					color: #1e1e27;
+
+					position: relative;
+          transition: all 0.2s;
+          svg {
+            color: inherit;
+            transition: inherit;
+          }
+          &:hover {
+            color: #b5aec4;
+          }
+        }
+
+			}
+		}
+  }
+
+  .checkout {
+    &__items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: absolute;
+      top: -.5625rem;
+      left: 1.375rem;
+
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+
+      color: #fff;
+      background-color: #fe4c50;
+      font-size: .75rem;
+    }
+    > a {
+      background: #eceff6;
+      border-radius: 50%;
+    }
+  }
+}
