@@ -3,17 +3,37 @@ import {
 	faSearch,
 	faShoppingCart,
 	faSignInAlt,
-	faUserPlus,
+	faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Container, Grid } from "@material-ui/core";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import "./index.scss";
 
 library.add(faSignInAlt, faUserPlus, faSearch, faShoppingCart);
 
 function Header(props) {
+	const { t, i18n } = useTranslation(["common"]);
+	const {
+		url,
+		params: { lng },
+	} = useRouteMatch();
+	const history = useHistory();
+
+	useEffect(() => {
+		i18n.changeLanguage(lng);
+	}, [i18n, lng]);
+
+	const handleLanguageChange = (e) => {
+    const selectedLng = 'vi';
+		const newUrl = url.replace(/^\/.{2}\//, `/${selectedLng}/`);
+		console.log(newUrl);
+    history.push(newUrl);
+  };
+
+
 	return (
 		<header className="header">
 			<Box className="header__top">
@@ -26,27 +46,16 @@ function Header(props) {
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<Box className="header__top-right">
-								<Box component="select">
-									<Box component="option" value="en">English</Box>
-									<Box component="option" value="vi">Viet Nam</Box>
-								</Box>
-								{/* <Box className="language">
-									<Link to="#">English</Link>
+							<button onClick={handleLanguageChange}>CHANGE LANG</button>
+								<Box className="language">
+									<Box className="language__current">English</Box>
 									<Box component="ul" className="language__selection">
-										<Box component="li">
-											<Link to="#">French</Link>
-										</Box>
-										<Box component="li">
-											<Link to="#">Italian</Link>
-										</Box>
-										<Box component="li">
-											<Link to="#">German</Link>
-										</Box>
-										<Box component="li">
-											<Link to="#">Spanish</Link>
-										</Box>
+										<Box component="li">English</Box>
+										<Box component="li">Viet Nam</Box>
+										<Box component="li">Japan</Box>
+										<Box component="li">French</Box>
 									</Box>
-								</Box> */}
+								</Box>
 
 								<Box className="account">
 									<Link to="#">My Account</Link>
@@ -82,7 +91,9 @@ function Header(props) {
 							<Box component="nav" className="navbar">
 								<Box component="ul" className="navbar__menu">
 									<Box component="li">
-										<Link to="/">Home</Link>
+										<Link to="/">
+											<Trans i18nKey="common:home">Home</Trans>
+										</Link>
 									</Box>
 									<Box component="li">
 										<Link to="/en/products">Shop</Link>

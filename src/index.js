@@ -5,7 +5,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import App from "./components/App";
 import NotFound from "./components/NotFound";
 import reportWebVitals from "./reportWebVitals";
-
+import './i18n';
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
