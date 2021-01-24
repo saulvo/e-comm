@@ -1,3 +1,7 @@
 {
-  "home": "home"
+  "home": "Home",
+  "shop": "Shop",
+  "promotion": "Promotion",
+  "blog" : "Blog",
+  "contact": "Contact"
 }

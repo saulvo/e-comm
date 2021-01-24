@@ -7,8 +7,10 @@ import './index.scss'
 
 const HomePage = lazy(() => import("../../features/Home"));
 const ProductFeature = lazy(() => import("../../features/Product"));
+
 function App() {
 	const match = useRouteMatch();
+
 	return (
 		<>
 			<Header />
