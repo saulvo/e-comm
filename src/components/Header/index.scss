@@ -114,7 +114,7 @@
 			transition: all 0.2s ease;
 
 			> li {
-				padding: 0 1rem;
+				padding: 0 .5rem;
 				line-height: 3.125rem;
 				> a {
 					display: block;
@@ -147,7 +147,7 @@
 
 	&__bot {
 		background-color: #fff;
-		box-shadow: 0 0 1rem rgba(#fff, 0.15);
+		box-shadow: 0 0 1rem rgba(#000, 0.15);
 		&-container {
 			position: relative;
 			height: 6.25rem;

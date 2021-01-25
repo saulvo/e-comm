@@ -7,17 +7,21 @@ import HomeIcon from "@material-ui/icons/Home";
 import React from "react";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
-import { useRouteMatch } from "react-router-dom";
+import { NavLink, useRouteMatch } from "react-router-dom";
 
 Breadcrumb.propTypes = {};
 
 const useStyles = makeStyles((theme) => ({
 	beadcrumb: {
 		textTransform: "capitalize",
+		paddingBottom: "1rem",
+		marginBottom: "2.5rem",
+		borderBottom: '1px solid #eee'
 	},
 	link: {
 		display: "flex",
 		fontSize: "0.9rem",
+		color: "rgba(0, 0, 0, 0.54)"
 	},
 	icon: {
 		marginRight: theme.spacing(0.5),
@@ -34,10 +38,10 @@ function Breadcrumb(props) {
 	return (
 		<>
 			<Breadcrumbs aria-label="breadcrumb" className={classes.beadcrumb}>
-				<Link color="inherit" href={`/${currentLang}`} className={classes.link}>
+				<NavLink color="inherit" to={`/${currentLang}`} className={classes.link}>
 					<HomeIcon className={classes.icon} />
 					<Trans i18nKey="common:home">Home</Trans>
-				</Link>
+				</NavLink>
 				<Typography color="textPrimary">
 					<Box fontSize="0.9rem" component="span">
 						<Trans i18nKey={`common:${url.slice(4)}`}>url.slice(4)</Trans>

@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
+const notFound = require("../../data/notFound")
 NotFound.propTypes = {
 
 };

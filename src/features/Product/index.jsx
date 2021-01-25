@@ -1,19 +1,18 @@
-import { Container } from "@material-ui/core";
+import { Box, Container } from "@material-ui/core";
 import React from "react";
 import Breadcrumb from "../../components/Breadcrumb";
 import ResetLangURL from "../../ResetLangURL";
 
-ProductFeatures.propTypes = {};
-
 function ProductFeatures(props) {
-  ResetLangURL()
+	ResetLangURL();
+
 	return (
-		<>
+		<Box mt={2}>
 			<Container>
-        <Breadcrumb/>
+				<Breadcrumb />
 				ProductFeatures
 			</Container>
-		</>
+		</Box>
 	);
 }
 

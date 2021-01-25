@@ -12,16 +12,16 @@ import reportWebVitals from "./reportWebVitals";
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<BrowserRouter>
-				<CssBaseline />
-				<Suspense fallback={<div>Loading</div>}>
-					<Switch>
-						<Redirect exact from="/" to="/en" />
-						<Route path="/:lng" component={App} />
-						<Route component={NotFound} />
-					</Switch>
-				</Suspense>
-			</BrowserRouter>
+				<BrowserRouter>
+					<CssBaseline />
+					<Suspense fallback={<div>Loading</div>}>
+						<Switch>
+							<Redirect exact from="/" to="/en" />
+							<Route path="/:lng" component={App} />
+							<Route component={NotFound} />
+						</Switch>
+					</Suspense>
+				</BrowserRouter>
 		</Provider>
 	</React.StrictMode>,
 	document.getElementById("root"),

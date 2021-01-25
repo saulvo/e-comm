@@ -2,6 +2,9 @@
   "home": "Trang chủ",
   "products": "Sản phẩm",
   "promotion": "Khuyến mãi",
-  "blog" : "Tin tức",
-  "contact": "Liên hệ"
+  "blog" : "Bài viết",
+  "contact": "Liên hệ",
+  "account":"Tài khoản",
+  "signin": "Đăng nhập",
+  "register": "Đăng ký"
 }

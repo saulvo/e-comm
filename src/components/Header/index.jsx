@@ -3,10 +3,10 @@ import {
 	faSearch,
 	faShoppingCart,
 	faSignInAlt,
-	faUserPlus,
+	faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, Container, Grid } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,75 +28,73 @@ function Header(props) {
 
 	return (
 		<header className="header">
-			<Box className="header__top">
+			<div className="header__top">
 				<Container fixed>
 					<Grid container spacing={0}>
 						<Grid item xs={12} sm={6}>
-							<Box className="header__top-left">
+							<div className="header__top-left">
 								free shipping on all u.s orders over $50
-							</Box>
+							</div>
 						</Grid>
 						<Grid item xs={12} sm={6}>
-							<Box className="header__top-right">
-								<Box className="language">
-									<Box className="language__current">
+							<div className="header__top-right">
+								<div className="language">
+									<div className="language__current">
 										{CONSTANTS.LANGUAGE[currentLang]}
-									</Box>
-									<Box component="ul" className="language__selection">
-										<Box
-											component="li"
+									</div>
+									<ul className="language__selection">
+										<li
 											className={`${currentLang === "en" ? "active" : ""}`}
 											onClick={() => {
 												dispatch(updateLang("en"));
 											}}
 										>
 											English
-										</Box>
-										<Box
-											component="li"
+										</li>
+										<li
 											className={`${currentLang === "vi" ? "active" : ""}`}
 											onClick={() => {
 												dispatch(updateLang("vi"));
 											}}
 										>
 											Viet Nam
-										</Box>
-									</Box>
-								</Box>
+										</li>
+									</ul>
+								</div>
 
-								<Box className="account">
-									<Link to="#">My Account</Link>
-									<Box component="ul" className="account__selection">
-										<Box component="li">
+								<div className="account">
+									<Link to="#"><Trans i18nKey="common:account">My Account</Trans></Link>
+									<ul className="account__selection">
+										<li>
 											<Link to="#">
 												<FontAwesomeIcon icon="sign-in-alt" />
-												Sign In
+												<Trans i18nKey="common:signin">Sign In</Trans>
 											</Link>
-										</Box>
-										<Box component="li">
+										</li>
+										<li>
 											<Link to="#">
 												<FontAwesomeIcon icon="user-plus" />
-												Register
+												<Trans i18nKey="common:register">Register</Trans>
 											</Link>
-										</Box>
-									</Box>
-								</Box>
-							</Box>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</Grid>
 					</Grid>
 				</Container>
-			</Box>
-			<Box className="header__bot">
+			</div>
+			<div className="header__bot">
 				<Container fixed>
 					<Grid container spacing={0} className="header__bot-container">
 						<Grid item xs={12}>
-							<Box className="logo">
+							<div className="logo">
 								<NavLink exact to={`/${currentLang}`}>
 									Online <span>Shop</span>
 								</NavLink>
-							</Box>
-							<Box component="nav" className="navbar">
-								<Box className="navbar__menu">
+							</div>
+							<nav className="navbar">
+								<div className="navbar__menu">
 									<NavLink exact to={`/${currentLang}`}>
 										<Trans i18nKey="common:home">Home</Trans>
 									</NavLink>
@@ -112,28 +110,28 @@ function Header(props) {
 									<NavLink to={`/${currentLang}/contact`}>
 										<Trans i18nKey="common:contact">Contact</Trans>
 									</NavLink>
-								</Box>
+								</div>
 
-								<Box component="ul" className="navbar__user">
-									<Box component="li">
+								<ul className="navbar__user">
+									<li>
 										<Link to="#">
 											<FontAwesomeIcon icon="search" />
 										</Link>
-									</Box>
-									<Box component="li" className="checkout">
+									</li>
+									<li className="checkout">
 										<Link to="#">
 											<FontAwesomeIcon icon="shopping-cart" />
-											<Box component="span" className="checkout__items">
+											<span className="checkout__items">
 												2
-											</Box>
+											</span>
 										</Link>
-									</Box>
-								</Box>
-							</Box>
+									</li>
+								</ul>
+							</nav>
 						</Grid>
 					</Grid>
 				</Container>
-			</Box>
+			</div>
 		</header>
 	);
 }

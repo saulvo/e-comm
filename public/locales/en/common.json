@@ -3,5 +3,8 @@
   "products": "Products",
   "promotion": "Promotion",
   "blog" : "Blog",
-  "contact": "Contact"
+  "contact": "Contact",
+  "account":"My Account",
+  "signin": "Sign In",
+  "register": "Register"
 }

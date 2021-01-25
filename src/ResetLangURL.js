@@ -7,7 +7,6 @@ function ResetLangURL() {
 	const location = useLocation();
 
 	const currentLang = useSelector((state) => state.language.current);
-	console.log(location.pathname.length);
 	useEffect(() => {
 		if (location.pathname.length === 3) {
 			history.push(`/${currentLang}`);
@@ -15,7 +14,7 @@ function ResetLangURL() {
 			const newUrl = location.pathname.replace(/^\/.{2}\//, `/${currentLang}/`);
 			history.push(newUrl);
 		}
-	}, [currentLang]);
+	}, [currentLang, location.pathname, history]);
 }
 
 export default ResetLangURL;
