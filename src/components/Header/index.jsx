@@ -9,38 +9,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Container, Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import {
-	Link,
-	useHistory,
-	useLocation,
-	useParams,
-	useRouteMatch,
-} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "./index.scss";
+import { updateLang } from "./languageSlice";
 
 library.add(faSignInAlt, faUserPlus, faSearch, faShoppingCart);
 
 function Header(props) {
+	const dispatch = useDispatch();
+	const currentLang = useSelector((state) => state.language.current);
 	const { t, i18n } = useTranslation(["common"]);
-	const {
-		params: { lng },
-	} = useRouteMatch();
-
-	const history = useHistory();
-	const location = useLocation();
 
 	useEffect(() => {
-		i18n.changeLanguage(lng);
-	}, [i18n, lng]);
-
-	const handleLanguageChange = (e) => {
-		const selectedLng = "vi";
-		// save current language to redux...
-
-		
-		const newUrl = location.pathname.replace(/^\/.{2}\//, `/${selectedLng}/`);
-		history.push(newUrl);
-	};
+		i18n.changeLanguage(currentLang);
+	}, [i18n, currentLang]);
 
 	return (
 		<header className="header">
@@ -54,14 +37,25 @@ function Header(props) {
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<Box className="header__top-right">
-								<button onClick={handleLanguageChange}>CHANGE LANG</button>
 								<Box className="language">
 									<Box className="language__current">English</Box>
 									<Box component="ul" className="language__selection">
-										<Box component="li">English</Box>
-										<Box component="li">Viet Nam</Box>
-										<Box component="li">Japan</Box>
-										<Box component="li">French</Box>
+										<Box
+											component="li"
+											onClick={() => {
+												dispatch(updateLang("en"));
+											}}
+										>
+											English
+										</Box>
+										<Box
+											component="li"
+											onClick={() => {
+												dispatch(updateLang("vi"));
+											}}
+										>
+											Viet Nam
+										</Box>
 									</Box>
 								</Box>
 
@@ -99,12 +93,12 @@ function Header(props) {
 							<Box component="nav" className="navbar">
 								<Box component="ul" className="navbar__menu">
 									<Box component="li">
-										<Link to="/">
+										<Link to={`/${currentLang}`}>
 											<Trans i18nKey="common:home">Home</Trans>
 										</Link>
 									</Box>
 									<Box component="li">
-										<Link to="/en/products">
+										<Link to={`/${currentLang}/products`}>
 											<Trans i18nKey="common:shop">Shop</Trans>
 										</Link>
 									</Box>

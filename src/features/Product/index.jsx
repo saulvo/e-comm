@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import LangURL from '../../components/LangURL';
 
 ProductFeatures.propTypes = {
 
@@ -9,6 +9,8 @@ function ProductFeatures(props) {
   return (
     <div>
       ProductFeatures
+
+      <LangURL/>
     </div>
   );
 }
