@@ -1,12 +1,12 @@
 import { Container } from "@material-ui/core";
 import React from "react";
 import Breadcrumb from "../../components/Breadcrumb";
-import ResetLang from "../../ResetLang";
+import ResetLangURL from "../../ResetLangURL";
 
 ProductFeatures.propTypes = {};
 
 function ProductFeatures(props) {
-  ResetLang()
+  ResetLangURL()
 	return (
 		<>
 			<Container>

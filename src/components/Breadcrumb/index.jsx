@@ -39,7 +39,9 @@ function Breadcrumb(props) {
 					<Trans i18nKey="common:home">Home</Trans>
 				</Link>
 				<Typography color="textPrimary">
-					<Box fontSize="0.9rem">{url.slice(4)}</Box>
+					<Box fontSize="0.9rem" component="span">
+						<Trans i18nKey={`common:${url.slice(4)}`}>url.slice(4)</Trans>
+					</Box>
 				</Typography>
 			</Breadcrumbs>
 		</>

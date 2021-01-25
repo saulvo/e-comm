@@ -91,9 +91,9 @@ function Header(props) {
 					<Grid container spacing={0} className="header__bot-container">
 						<Grid item xs={12}>
 							<Box className="logo">
-								<Link to="/">
+								<NavLink exact to={`/${currentLang}`}>
 									Online <span>Shop</span>
-								</Link>
+								</NavLink>
 							</Box>
 							<Box component="nav" className="navbar">
 								<Box className="navbar__menu">
