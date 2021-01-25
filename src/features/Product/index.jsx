@@ -1,18 +1,20 @@
-import React from 'react';
-import LangURL from '../../components/LangURL';
+import { Container } from "@material-ui/core";
+import React from "react";
+import Breadcrumb from "../../components/Breadcrumb";
+import ResetLang from "../../ResetLang";
 
-ProductFeatures.propTypes = {
-
-};
+ProductFeatures.propTypes = {};
 
 function ProductFeatures(props) {
-  return (
-    <div>
-      ProductFeatures
-
-      <LangURL/>
-    </div>
-  );
+  ResetLang()
+	return (
+		<>
+			<Container>
+        <Breadcrumb/>
+				ProductFeatures
+			</Container>
+		</>
+	);
 }
 
 export default ProductFeatures;

@@ -7,6 +7,9 @@ import './index.scss'
 
 const HomePage = lazy(() => import("../../features/Home"));
 const ProductFeature = lazy(() => import("../../features/Product"));
+const PromotionFeature = lazy(() => import("../../features/Promotion"));
+const BlogFeature = lazy(() => import("../../features/Blog"));
+const ContactFeature = lazy(() => import("../../features/Contact"));
 
 function App() {
 	const match = useRouteMatch();
@@ -18,6 +21,9 @@ function App() {
 				<Switch>
 					<Route exact path={match.path} component={HomePage} />
 					<Route path={`${match.path}/products`} component={ProductFeature} />
+					<Route path={`${match.path}/promotion`} component={PromotionFeature} />
+					<Route path={`${match.path}/blog`} component={BlogFeature} />
+					<Route path={`${match.path}/contact`} component={ContactFeature} />
 					<Route component={NotFound} />
 				</Switch>
 			</Suspense>

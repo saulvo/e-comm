@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
-function LangURL() {
+function ResetLang() {
 	const history = useHistory();
 	const location = useLocation();
 
@@ -12,8 +12,6 @@ function LangURL() {
 		const newUrl = location.pathname.replace(/^\/.{2}\//, `/${currentLang}/`);
 		history.push(newUrl);
 	}, [currentLang]);
-
-	return <></>;
 }
 
-export default LangURL;
+export default ResetLang;

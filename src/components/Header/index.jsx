@@ -10,7 +10,7 @@ import { Box, Container, Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import CONSTANTS from "../../Constants";
 import "./index.scss";
 import { updateLang } from "./languageSlice";
@@ -40,9 +40,7 @@ function Header(props) {
 							<Box className="header__top-right">
 								<Box className="language">
 									<Box className="language__current">
-										{
-											CONSTANTS.LANGUAGE[currentLang]
-										}
+										{CONSTANTS.LANGUAGE[currentLang]}
 									</Box>
 									<Box component="ul" className="language__selection">
 										<Box
@@ -98,32 +96,22 @@ function Header(props) {
 								</Link>
 							</Box>
 							<Box component="nav" className="navbar">
-								<Box component="ul" className="navbar__menu">
-									<Box component="li">
-										<Link to={`/${currentLang}`}>
-											<Trans i18nKey="common:home">Home</Trans>
-										</Link>
-									</Box>
-									<Box component="li">
-										<Link to={`/${currentLang}/products`}>
-											<Trans i18nKey="common:shop">Shop</Trans>
-										</Link>
-									</Box>
-									<Box component="li">
-										<Link to="#">
-											<Trans i18nKey="common:promotion">Promotion</Trans>
-										</Link>
-									</Box>
-									<Box component="li">
-										<Link to="#">
-											<Trans i18nKey="common:blog">Blog</Trans>
-										</Link>
-									</Box>
-									<Box component="li">
-										<Link to="#">
-											<Trans i18nKey="common:contact">Contact</Trans>
-										</Link>
-									</Box>
+								<Box className="navbar__menu">
+									<NavLink exact to={`/${currentLang}`}>
+										<Trans i18nKey="common:home">Home</Trans>
+									</NavLink>
+									<NavLink to={`/${currentLang}/products`}>
+										<Trans i18nKey="common:products">Products</Trans>
+									</NavLink>
+									<NavLink to={`/${currentLang}/promotion`}>
+										<Trans i18nKey="common:promotion">Promotion</Trans>
+									</NavLink>
+									<NavLink to={`/${currentLang}/blog`}>
+										<Trans i18nKey="common:blog">Blog</Trans>
+									</NavLink>
+									<NavLink to={`/${currentLang}/contact`}>
+										<Trans i18nKey="common:contact">Contact</Trans>
+									</NavLink>
 								</Box>
 
 								<Box component="ul" className="navbar__user">
