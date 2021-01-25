@@ -1,11 +1,12 @@
 import React from 'react';
+import ResetLangURL from '../ultils/ResetLangURL';
 
-const notFound = require("../../data/notFound")
 NotFound.propTypes = {
 
 };
 
 function NotFound(props) {
+  ResetLangURL()
   return (
     <div>
       NotFound

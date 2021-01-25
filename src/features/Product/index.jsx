@@ -1,7 +1,7 @@
 import { Box, Container } from "@material-ui/core";
 import React from "react";
 import Breadcrumb from "../../components/Breadcrumb";
-import ResetLangURL from "../../ResetLangURL";
+import ResetLangURL from "../../components/ultils/ResetLangURL";
 
 function ProductFeatures(props) {
 	ResetLangURL();

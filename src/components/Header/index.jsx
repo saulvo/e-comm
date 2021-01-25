@@ -20,7 +20,7 @@ library.add(faSignInAlt, faUserPlus, faSearch, faShoppingCart);
 function Header(props) {
 	const dispatch = useDispatch();
 	const currentLang = useSelector((state) => state.language.current);
-	const { t, i18n } = useTranslation(["common"]);
+	const { i18n } = useTranslation(["common"]);
 
 	useEffect(() => {
 		i18n.changeLanguage(currentLang);
@@ -63,7 +63,9 @@ function Header(props) {
 								</div>
 
 								<div className="account">
-									<Link to="#"><Trans i18nKey="common:account">My Account</Trans></Link>
+									<Link to="#">
+										<Trans i18nKey="common:account">My Account</Trans>
+									</Link>
 									<ul className="account__selection">
 										<li>
 											<Link to="#">
@@ -121,9 +123,7 @@ function Header(props) {
 									<li className="checkout">
 										<Link to="#">
 											<FontAwesomeIcon icon="shopping-cart" />
-											<span className="checkout__items">
-												2
-											</span>
+											<span className="checkout__items">2</span>
 										</Link>
 									</li>
 								</ul>

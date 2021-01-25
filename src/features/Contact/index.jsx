@@ -1,11 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import ResetLangURL from '../../components/ultils/ResetLangURL';
 
 Contact.propTypes = {
 
 };
 
 function Contact(props) {
+  ResetLangURL()
   return (
     <div>
       Contact

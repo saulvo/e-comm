@@ -1,11 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import ResetLangURL from '../../components/ultils/ResetLangURL';
 
 Blog.propTypes = {
 
 };
 
 function Blog(props) {
+  ResetLangURL()
   return (
     <div>
       Blog

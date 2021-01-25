@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Switch, useRouteMatch } from "react-router-dom";
 import Footer from "../Footer";
 import Header from "../Header";
 import NotFound from "../NotFound";
