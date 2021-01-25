@@ -11,6 +11,7 @@ import React, { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import CONSTANTS from "../../Constants";
 import "./index.scss";
 import { updateLang } from "./languageSlice";
 
@@ -38,10 +39,15 @@ function Header(props) {
 						<Grid item xs={12} sm={6}>
 							<Box className="header__top-right">
 								<Box className="language">
-									<Box className="language__current">English</Box>
+									<Box className="language__current">
+										{
+											CONSTANTS.LANGUAGE[currentLang]
+										}
+									</Box>
 									<Box component="ul" className="language__selection">
 										<Box
 											component="li"
+											className={`${currentLang === "en" ? "active" : ""}`}
 											onClick={() => {
 												dispatch(updateLang("en"));
 											}}
@@ -50,6 +56,7 @@ function Header(props) {
 										</Box>
 										<Box
 											component="li"
+											className={`${currentLang === "vi" ? "active" : ""}`}
 											onClick={() => {
 												dispatch(updateLang("vi"));
 											}}

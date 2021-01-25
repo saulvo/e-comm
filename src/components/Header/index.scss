@@ -60,7 +60,7 @@
 				font-size: 0.8125rem;
 				cursor: pointer;
 
-				&:hover {
+				&:hover, &.active {
 					color: #b5aec4;
 				}
 
