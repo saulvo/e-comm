@@ -3,6 +3,7 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { Trans } from "react-i18next";
 import "./index.scss";
 
 library.add(faAngleDown);
@@ -20,6 +21,7 @@ const sortName = {
 	originalPrice: "Price",
 	productName: "Product Name",
 };
+
 function ProductFilterSort({ onChange, sorts }) {
 	const [selected, setSelected] = useState(sorts[0]);
 
@@ -29,7 +31,11 @@ function ProductFilterSort({ onChange, sorts }) {
 	};
 	return (
 		<div className="custom-select">
-			<span>{sortName[selected]}</span>
+			<span>
+				<Trans i18nKey={`productFilter:${selected}`}>
+					{sortName[selected]}
+				</Trans>
+			</span>
 			<FontAwesomeIcon icon="angle-down" className="icon" />
 			<ul>
 				{sorts.map((item, idx) => (
@@ -39,7 +45,7 @@ function ProductFilterSort({ onChange, sorts }) {
 						data-value={item}
 						onClick={handleClick}
 					>
-						{sortName[item]}
+						<Trans i18nKey={`productFilter:${item}`}>{sortName[item]}</Trans>
 					</li>
 				))}
 			</ul>
