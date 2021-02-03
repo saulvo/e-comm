@@ -2,6 +2,7 @@ import { Box, Container, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import productApi from "../../../../api/productApi";
 import Loading from "../../../../components/Loading";
+import ProductFilterCat from "../../components/ProductFilterCat";
 import ProductFilterLimit from "../../components/ProductFilterLimit";
 import ProductFilterSort from "../../components/ProductFilterSort";
 import ProductList from "../../components/ProductList";
@@ -9,13 +10,14 @@ import ProductList from "../../components/ProductList";
 function ProductListPage(props) {
 	const [productList, setProductList] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const defaultFilters = {
+	const [filters, setFilters] = useState({
 		_page: 1,
 		_limit: 12,
 		_sort: "createdAt",
 		_order: "desc",
-	};
-	const [filters, setFilters] = useState(defaultFilters);
+		// _categoryId: "",
+	});
+	const [categoryId, setCategoryId] = useState("");
 
 	useEffect(() => {
 		(async () => {
@@ -38,7 +40,10 @@ function ProductListPage(props) {
 	};
 	const handleSortChange = (sort) => {
 		if (sort === "default") {
-			setFilters(defaultFilters);
+			setFilters((x) => ({
+				...x,
+				_sort: "createdAt",
+			}));
 			return;
 		}
 
@@ -48,30 +53,34 @@ function ProductListPage(props) {
 		}));
 	};
 
+	const handleCategoryClick = (catId) => {
+		setCategoryId(catId);
+	};
+
 	return (
 		<>
 			<Container fixed>
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={3}>
-						Filters
+						<ProductFilterCat
+							onClick={handleCategoryClick}
+							categoryId={categoryId}
+						/>
 					</Grid>
 					<Grid item xs={12} md={9}>
-						<Box
-							display="flex"
-							justifyContent="space-between"
-							maxWidth="385px"
-							mb={2}
-						>
+						<Box display="flex" justifyContent="space-between" maxWidth="335px">
 							<ProductFilterSort
 								onChange={handleSortChange}
 								sorts={["default", "originalPrice", "productName"]}
+								loading={loading}
 							/>
 							<ProductFilterLimit
 								onChange={handleShowLimitChange}
 								limits={[12, 16, 24]}
+								loading={loading}
 							/>
 						</Box>
-						<Box position="relative">
+						<Box position="relative" mt={2}>
 							{loading && <Loading />}
 							<ProductList list={productList} />
 						</Box>

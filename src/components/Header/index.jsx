@@ -1,21 +1,11 @@
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-	faSearch,
-	faShoppingCart,
-	faSignInAlt,
-	faUserPlus
-} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import CONSTANTS from "../../Constants";
 import "./index.scss";
 import { updateLang } from "./languageSlice";
-
-library.add(faSignInAlt, faUserPlus, faSearch, faShoppingCart);
 
 function Header(props) {
 	const dispatch = useDispatch();
@@ -33,14 +23,16 @@ function Header(props) {
 					<Grid container spacing={0}>
 						<Grid item xs={12} sm={6}>
 							<div className="header__top-left">
-								free shipping on all u.s orders over $50
+								<Trans i18nKey="common:header_slogan">
+									free shipping on all u.s orders over $50
+								</Trans>
 							</div>
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<div className="header__top-right">
 								<div className="language">
 									<div className="language__current">
-										{CONSTANTS.LANGUAGE[currentLang]}
+										<Trans i18nKey={`common:${currentLang}`}>English</Trans>
 									</div>
 									<ul className="language__selection">
 										<li

@@ -1,8 +1,9 @@
 const CONSTANTS = {
-  LANGUAGE: {
-    'en': 'English',
-    'vi': 'Tiếng Việt'
-  }
-}
+	SORT: {
+		default: "Default Sorting",
+		originalPrice: "Price",
+		productName: "Product Name",
+	},
+};
 
 export default CONSTANTS;

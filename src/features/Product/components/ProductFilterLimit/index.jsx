@@ -1,22 +1,23 @@
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import "./index.scss";
 
-library.add(faAngleDown);
 
 ProductFilterLimit.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	limits: PropTypes.array,
+	loading: PropTypes.bool,
 };
 
 ProductFilterLimit.defaultProps = {
 	limits: [12],
+	loading: false,
 };
-function ProductFilterLimit({ onChange, limits }) {
+function ProductFilterLimit({ onChange, limits, loading }) {
 	const [selected, setSelected] = useState(limits[0]);
+	const { i18n } = useTranslation(["productFilter"]);
 
 	const handleClick = (e) => {
 		setSelected(e.currentTarget.dataset.value);
@@ -24,20 +25,25 @@ function ProductFilterLimit({ onChange, limits }) {
 	};
 	return (
 		<div className="custom-select">
-			<span>Show {selected}</span>
+			<span>
+				<Trans i18nKey="productFilter:show">Show</Trans>
+				&nbsp;{selected}
+			</span>
 			<FontAwesomeIcon icon="angle-down" className="icon" />
-			<ul>
-				{limits.map((item, idx) => (
-					<li
-						key={idx}
-						className={parseInt(selected) === item ? "selected" : ""}
-						data-value={item}
-						onClick={handleClick}
-					>
-						{item}
-					</li>
-				))}
-			</ul>
+			{!loading && (
+				<ul>
+					{limits.map((item, idx) => (
+						<li
+							key={idx}
+							className={parseInt(selected) === item ? "selected" : ""}
+							data-value={item}
+							onClick={handleClick}
+						>
+							{item}
+						</li>
+					))}
+				</ul>
+			)}
 		</div>
 	);
 }

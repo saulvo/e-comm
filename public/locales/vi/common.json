@@ -6,5 +6,10 @@
   "contact": "Liên hệ",
   "account":"Tài khoản",
   "signin": "Đăng nhập",
-  "register": "Đăng ký"
+  "register": "Đăng ký",
+
+  "vi": "Tiếng Việt",
+  "en": "Tiếng Anh",
+
+  "header_slogan":"Miễn phí giao hàng cho tất cả đơn hàng trên $50"
 }
