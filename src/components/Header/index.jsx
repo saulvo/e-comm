@@ -115,7 +115,7 @@ function Header(props) {
 									<li className="checkout">
 										<Link to="#">
 											<FontAwesomeIcon icon="shopping-cart" />
-											<span className="checkout__items">2</span>
+											<span className="checkout__items">0</span>
 										</Link>
 									</li>
 								</ul>

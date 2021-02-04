@@ -64,6 +64,10 @@
 					color: #b5aec4;
 				}
 
+				&.active {
+					cursor: default;
+				}
+
 				&:last-child {
 					> a {
 						border-bottom: none;
@@ -190,6 +194,9 @@
 				transition: all 0.2s;
 				&:hover, &.active {
 					color: #b5aec4;
+				}
+				&.active {
+					cursor: default;
 				}
 			}
 		}

@@ -57,6 +57,7 @@ function ProductListPage() {
 		setFilters({
 			...filters,
 			_limit: limit,
+			_page: 1,
 		});
 	};
 
@@ -65,6 +66,7 @@ function ProductListPage() {
 			setFilters({
 				...filters,
 				_sort: "createdAt",
+				_page: 1,
 			});
 			return;
 		}
@@ -72,6 +74,7 @@ function ProductListPage() {
 		setFilters({
 			...filters,
 			_sort: sort,
+			_page: 1,
 		});
 	};
 

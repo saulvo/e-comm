@@ -48,18 +48,20 @@ function Pagination({ pagination, onPageChange }) {
 				</li>
 			)}
 
-			{pageList.map(
-				(page, idx) =>
-					page !== -1 && (
-						<li
-							key={idx}
-							className={page === _page ? "is-active" : ""}
-							onClick={() => handleOnPageChange(page)}
-						>
-							{page}
-						</li>
-					),
-			)}
+
+			{totalPages > 1 &&
+				pageList.map(
+					(page, idx) =>
+						page !== -1 && (
+							<li
+								key={idx}
+								className={page === _page ? "is-active" : ""}
+								onClick={() => handleOnPageChange(page)}
+							>
+								{page}
+							</li>
+						),
+				)}
 
 			{_page < totalPages && (
 				<li onClick={() => handleOnPageChange(_page + 1)}>
