@@ -6,6 +6,8 @@ import {
 	faSignInAlt,
 	faUserPlus,
 	faAngleDoubleRight,
+	faLongArrowAltRight,
+	faLongArrowAltLeft
 } from "@fortawesome/free-solid-svg-icons";
 import { lazy, Suspense } from "react";
 import { Switch, useRouteMatch } from "react-router-dom";
@@ -22,6 +24,8 @@ library.add(
 	faShoppingCart,
 	faAngleDown,
 	faAngleDoubleRight,
+	faLongArrowAltRight,
+	faLongArrowAltLeft
 );
 
 const HomePage = lazy(() => import("../../features/Home"));

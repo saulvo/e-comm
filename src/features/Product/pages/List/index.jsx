@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import categoryApi from "../../../../api/categoryApi";
 import productApi from "../../../../api/productApi";
 import Loading from "../../../../components/Loading";
+import Pagination from "../../components/Pagination";
 import ProductFilterCat from "../../components/ProductFilterCat";
 import ProductFilterLimit from "../../components/ProductFilterLimit";
 import ProductFilterSort from "../../components/ProductFilterSort";
@@ -17,6 +18,13 @@ function ProductListPage() {
 		_sort: "createdAt",
 		_order: "desc",
 	});
+
+	const [pagination, setPagination] = useState({
+		_page: 1,
+		_limit: 12,
+		_totalRows: 1,
+	});
+
 	const [categoryId, setCategoryId] = useState("");
 	const [categoryList, setCategoryList] = useState([]);
 
@@ -35,8 +43,9 @@ function ProductListPage() {
 		(async () => {
 			try {
 				setLoading(true);
-				const { data } = await productApi.getAll(filters);
+				const { data, pagination } = await productApi.getAll(filters);
 				setProductList(data);
+				setPagination(pagination);
 			} catch (error) {
 				console.log("Fail to fetch product list:", error);
 			}
@@ -45,66 +54,80 @@ function ProductListPage() {
 	}, [filters]);
 
 	const handleShowLimitChange = (limit) => {
-		setFilters((x) => ({
-			...x,
+		setFilters({
+			...filters,
 			_limit: limit,
-		}));
+		});
 	};
+
 	const handleSortChange = (sort) => {
 		if (sort === "default") {
-			setFilters((x) => ({
-				...x,
+			setFilters({
+				...filters,
 				_sort: "createdAt",
-			}));
+			});
 			return;
 		}
 
-		setFilters((x) => ({
-			...x,
+		setFilters({
+			...filters,
 			_sort: sort,
-		}));
+		});
 	};
 
 	const handleCategoryClick = (catId) => {
-		setFilters((x) => ({
-			...x,
+		setFilters({
+			...filters,
 			categoryId: catId,
-		}));
+			_page: 1
+		});
 		setCategoryId(catId);
 	};
 
+	const handlePageChange = (newPage) => {
+		console.log("New page: ", newPage);
+		setFilters({
+			...filters,
+			_page: newPage,
+		});
+	};
+
 	return (
-		<>
-			<Container fixed>
-				<Grid container spacing={3}>
-					<Grid item xs={12} md={3}>
-						<ProductFilterCat
-							list={categoryList}
-							onClick={handleCategoryClick}
-							categoryId={categoryId}
-						/>
-					</Grid>
-					<Grid item xs={12} md={9}>
-						<Box display="flex" justifyContent="space-between" maxWidth="335px">
-							<ProductFilterSort
-								onChange={handleSortChange}
-								sorts={["default", "originalPrice", "productName"]}
-								loading={loading}
-							/>
-							<ProductFilterLimit
-								onChange={handleShowLimitChange}
-								limits={[12, 16, 24]}
-								loading={loading}
-							/>
-						</Box>
-						<Box position="relative" mt={2}>
-							{loading && <Loading />}
-							<ProductList list={productList} />
-						</Box>
-					</Grid>
+		<Container fixed>
+			<Grid container spacing={3}>
+				<Grid item xs={12} md={3}>
+					<ProductFilterCat
+						list={categoryList}
+						onClick={handleCategoryClick}
+						categoryId={categoryId}
+					/>
 				</Grid>
-			</Container>
-		</>
+				<Grid item xs={12} md={9}>
+					<Box display="flex" justifyContent="space-between" maxWidth="335px">
+						<ProductFilterSort
+							onChange={handleSortChange}
+							sorts={["default", "originalPrice", "productName"]}
+							loading={loading}
+						/>
+						<ProductFilterLimit
+							onChange={handleShowLimitChange}
+							limits={[12, 16, 24]}
+							loading={loading}
+						/>
+					</Box>
+					<Box position="relative" mt={2}>
+						{loading && <Loading />}
+						<ProductList list={productList} />
+					</Box>
+					<Box pt={3} pb={5}>
+						<Pagination
+							pagination={pagination}
+							onPageChange={handlePageChange}
+						/>
+					</Box>
+				</Grid>
+			</Grid>
+		</Container>
 	);
 }
 

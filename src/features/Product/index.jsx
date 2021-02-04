@@ -6,7 +6,6 @@ import ResetLangURL from "../../components/ultils/ResetLangURL";
 
 const ProdutListPage = lazy(() => import("./pages/List"));
 const ProdutDetailPage = lazy(() => import("./pages/Detail"));
-
 function ProductFeatures(props) {
 	ResetLangURL();
 
