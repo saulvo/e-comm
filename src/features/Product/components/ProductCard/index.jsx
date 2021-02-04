@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import ultils from "../../../../components/ultils";
 import "./index.scss";
 
@@ -9,6 +10,7 @@ ProductCard.propTypes = {
 };
 function ProductCard({ product }) {
 	const { t } = useTranslation(["product"]);
+	const currentLang = useSelector((state) => state.language.current);
 
 	const isSale = product.salePrice === product.originalPrice;
 	const promotionPercent =
@@ -24,11 +26,11 @@ function ProductCard({ product }) {
 			<div className="prod-card__inf">
 				<h3 className="prod-card__name">{product.name}</h3>
 				<div className="prod-card__price">
-					{isSale && ultils.formatPrice(product.originalPrice)}
+					{isSale && ultils.formatPrice(product.originalPrice, currentLang)}
 					{!isSale && (
 						<>
-							{ ultils.formatPrice(product.salePrice)}
-							<span>{ ultils.formatPrice(product.originalPrice)}</span>
+							{ ultils.formatPrice(product.salePrice, currentLang)}
+							<span>{ ultils.formatPrice(product.originalPrice, currentLang)}</span>
 						</>
 					)}
 				</div>
