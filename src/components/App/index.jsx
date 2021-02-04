@@ -33,6 +33,7 @@ const ProductFeature = lazy(() => import("../../features/Product"));
 const PromotionFeature = lazy(() => import("../../features/Promotion"));
 const BlogFeature = lazy(() => import("../../features/Blog"));
 const ContactFeature = lazy(() => import("../../features/Contact"));
+const CartFeature = lazy(() => import("../../features/Cart"));
 
 function App() {
 	const match = useRouteMatch();
@@ -62,6 +63,11 @@ function App() {
 						path={`${match.path}/contact`}
 						component={ContactFeature}
 						title="contact"
+					/>
+					<RenderRoute
+						path={`${match.path}/cart`}
+						component={CartFeature}
+						title="cart"
 					/>
 					<RenderRoute component={NotFound} title="404" />
 				</Switch>
