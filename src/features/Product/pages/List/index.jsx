@@ -1,5 +1,6 @@
 import { Box, Container, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import categoryApi from "../../../../api/categoryApi";
 import productApi from "../../../../api/productApi";
 import Loading from "../../../../components/Loading";
 import ProductFilterCat from "../../components/ProductFilterCat";
@@ -7,7 +8,7 @@ import ProductFilterLimit from "../../components/ProductFilterLimit";
 import ProductFilterSort from "../../components/ProductFilterSort";
 import ProductList from "../../components/ProductList";
 
-function ProductListPage(props) {
+function ProductListPage() {
 	const [productList, setProductList] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [filters, setFilters] = useState({
@@ -15,9 +16,20 @@ function ProductListPage(props) {
 		_limit: 12,
 		_sort: "createdAt",
 		_order: "desc",
-		// _categoryId: "",
 	});
 	const [categoryId, setCategoryId] = useState("");
+	const [categoryList, setCategoryList] = useState([]);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const res = await categoryApi.getAll();
+				setCategoryList(res);
+			} catch (error) {
+				console.log("Fail to fetch category list:", error);
+			}
+		})();
+	}, []);
 
 	useEffect(() => {
 		(async () => {
@@ -54,6 +66,10 @@ function ProductListPage(props) {
 	};
 
 	const handleCategoryClick = (catId) => {
+		setFilters((x) => ({
+			...x,
+			categoryId: catId,
+		}));
 		setCategoryId(catId);
 	};
 
@@ -63,6 +79,7 @@ function ProductListPage(props) {
 				<Grid container spacing={3}>
 					<Grid item xs={12} md={3}>
 						<ProductFilterCat
+							list={categoryList}
 							onClick={handleCategoryClick}
 							categoryId={categoryId}
 						/>

@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
-import CONTANT from "../../../../Constants";
+import { useTranslation } from "react-i18next";
 import "./index.scss";
 
 ProductFilterSort.propTypes = {
@@ -16,8 +15,8 @@ ProductFilterSort.defaultProps = {
 };
 
 function ProductFilterSort({ onChange, sorts, loading }) {
+	const { t } = useTranslation(["productFilter"]);
 	const [selected, setSelected] = useState(sorts[0]);
-	const { i18n } = useTranslation(["productFilter"]);
 
 	const handleClick = (e) => {
 		setSelected(e.currentTarget.dataset.value);
@@ -25,11 +24,7 @@ function ProductFilterSort({ onChange, sorts, loading }) {
 	};
 	return (
 		<div className="custom-select">
-			<span>
-				<Trans i18nKey={`productFilter:${selected}`}>
-					{CONTANT.SORT[selected]}
-				</Trans>
-			</span>
+			<span>{t(selected)}</span>
 			<FontAwesomeIcon icon="angle-down" className="icon" />
 			{!loading && (
 				<ul>
@@ -40,9 +35,7 @@ function ProductFilterSort({ onChange, sorts, loading }) {
 							data-value={item}
 							onClick={handleClick}
 						>
-							<Trans i18nKey={`productFilter:${item}`}>
-								{CONTANT.SORT[item]}
-							</Trans>
+							{t(item)}
 						</li>
 					))}
 				</ul>

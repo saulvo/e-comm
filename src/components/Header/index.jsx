@@ -41,7 +41,7 @@ function Header(props) {
 												dispatch(updateLang("en"));
 											}}
 										>
-											English
+											<Trans i18nKey="common:en">English</Trans>
 										</li>
 										<li
 											className={`${currentLang === "vi" ? "active" : ""}`}
@@ -49,7 +49,7 @@ function Header(props) {
 												dispatch(updateLang("vi"));
 											}}
 										>
-											Viet Nam
+											<Trans i18nKey="common:vi">Viet Nam</Trans>
 										</li>
 									</ul>
 								</div>

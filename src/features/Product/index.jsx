@@ -11,6 +11,7 @@ function ProductFeatures(props) {
 	ResetLangURL();
 
 	const match = useRouteMatch();
+
 	return (
 		<Box mt={2}>
 			<Container>

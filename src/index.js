@@ -16,7 +16,7 @@ ReactDOM.render(
 					<CssBaseline />
 					<Suspense fallback={<div>Loading</div>}>
 						<Switch>
-							<Redirect exact from="/" to="/en" />
+							<Redirect exact from="/" to="/vi" />
 							<Route path="/:lng" component={App} />
 							<Route component={NotFound} />
 						</Switch>

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import ultils from "../../../../components/ultils";
 import "./index.scss";
 
@@ -7,6 +8,8 @@ ProductCard.propTypes = {
 	product: PropTypes.object.isRequired,
 };
 function ProductCard({ product }) {
+	const { t } = useTranslation(["product"]);
+
 	const isSale = product.salePrice === product.originalPrice;
 	const promotionPercent =
 		Math.round((100 - (product.salePrice * 100) / product.originalPrice) * 10) /
@@ -29,7 +32,7 @@ function ProductCard({ product }) {
 						</>
 					)}
 				</div>
-				<button className="prod-card__btn">Add to card</button>
+				<button className="prod-card__btn">{t('addCart')}</button>
 			</div>
 		</div>
 	);

@@ -32,6 +32,7 @@ const ContactFeature = lazy(() => import("../../features/Contact"));
 
 function App() {
 	const match = useRouteMatch();
+
 	return (
 		<>
 			<Header />

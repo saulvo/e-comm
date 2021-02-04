@@ -2,5 +2,7 @@
   "default": "Default Sorting",
   "originalPrice": "Price",
   "productName": "Product Name",
-  "show": "Show"
+  "show": "Show",
+
+  "productCat": "Product Category"
 }
