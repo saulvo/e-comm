@@ -13,7 +13,7 @@ function ProductFeatures(props) {
 
 	return (
 		<Box mt={2}>
-			<Container>
+			<Container fixed>
 				<Breadcrumb />
 				<Suspense fallback={<div>Loading...</div>}>
 					<Switch>

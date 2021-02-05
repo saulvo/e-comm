@@ -42,6 +42,7 @@ function ProductListPage() {
 	useEffect(() => {
 		(async () => {
 			try {
+				window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
 				setLoading(true);
 				const { data, pagination } = await productApi.getAll(filters);
 				setProductList(data);
