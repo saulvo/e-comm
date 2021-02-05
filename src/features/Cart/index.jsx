@@ -34,7 +34,7 @@ const rows = [
 ];
 
 function FeatureCart(props) {
-	ResetLangURL();
+	;
 	const { t } = useTranslation(["common"]);
 	const classes = useStyles();
 

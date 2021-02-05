@@ -6,7 +6,7 @@ Promotion.propTypes = {
 };
 
 function Promotion(props) {
-  ResetLangURL()
+
   return (
     <div>
       Promotion

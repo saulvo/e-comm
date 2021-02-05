@@ -6,7 +6,7 @@ Contact.propTypes = {
 };
 
 function Contact(props) {
-  ResetLangURL()
+
   return (
     <div>
       Contact

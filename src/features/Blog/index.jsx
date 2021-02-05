@@ -6,7 +6,7 @@ Blog.propTypes = {
 };
 
 function Blog(props) {
-  ResetLangURL()
+
   return (
     <div>
       Blog

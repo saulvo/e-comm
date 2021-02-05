@@ -6,7 +6,7 @@ NotFound.propTypes = {
 };
 
 function NotFound(props) {
-  ResetLangURL()
+
   return (
     <div>
       NotFound
