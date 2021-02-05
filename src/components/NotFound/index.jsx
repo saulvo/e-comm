@@ -1,5 +1,4 @@
 import React from 'react';
-import ResetLangURL from '../ultils/ResetLangURL';
 
 NotFound.propTypes = {
 

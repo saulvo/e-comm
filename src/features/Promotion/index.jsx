@@ -1,5 +1,4 @@
 import React from 'react';
-import ResetLangURL from '../../components/ultils/ResetLangURL';
 
 Promotion.propTypes = {
 

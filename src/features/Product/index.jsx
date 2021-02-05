@@ -2,7 +2,6 @@ import { Box, Container } from "@material-ui/core";
 import React, { lazy, Suspense } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
-import ResetLangURL from "../../components/ultils/ResetLangURL";
 
 const ProdutListPage = lazy(() => import("./pages/List"));
 const ProdutDetailPage = lazy(() => import("./pages/Detail"));
