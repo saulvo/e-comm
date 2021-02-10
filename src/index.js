@@ -1,3 +1,7 @@
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import { purple } from "@material-ui/core/colors";
+import Button from "@material-ui/core/Button";
 import { CssBaseline } from "@material-ui/core";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
@@ -9,9 +13,21 @@ import NotFound from "./components/NotFound";
 import "./i18n";
 import reportWebVitals from "./reportWebVitals";
 
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: "#1e1e27",
+		},
+		secondary: {
+			main: "#fe4c50",
+		},
+	},
+});
+
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
+			<ThemeProvider theme={theme}>
 				<BrowserRouter>
 					<CssBaseline />
 					<Suspense fallback={<div>Loading</div>}>
@@ -22,6 +38,7 @@ ReactDOM.render(
 						</Switch>
 					</Suspense>
 				</BrowserRouter>
+			</ThemeProvider>
 		</Provider>
 	</React.StrictMode>,
 	document.getElementById("root"),

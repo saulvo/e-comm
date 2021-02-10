@@ -1,15 +1,20 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+	faAngleDoubleRight,
 	faAngleDown,
+	faLongArrowAltLeft,
+	faLongArrowAltRight,
+	faMinus,
+	faPlus,
 	faSearch,
 	faShoppingCart,
 	faSignInAlt,
-	faUserPlus,
-	faAngleDoubleRight,
-	faLongArrowAltRight,
-	faLongArrowAltLeft
+	faTimesCircle,
+	faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { lazy, Suspense } from "react";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 import { Switch, useRouteMatch } from "react-router-dom";
 import Footer from "../Footer";
 import Header from "../Header";
@@ -25,7 +30,10 @@ library.add(
 	faAngleDown,
 	faAngleDoubleRight,
 	faLongArrowAltRight,
-	faLongArrowAltLeft
+	faLongArrowAltLeft,
+	faPlus,
+	faMinus,
+	faTimesCircle,
 );
 
 const HomePage = lazy(() => import("../../features/Home"));
@@ -73,6 +81,8 @@ function App() {
 				</Switch>
 			</Suspense>
 			<Footer />
+
+			<ReactNotification  className="top-0"/>
 		</>
 	);
 }

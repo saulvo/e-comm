@@ -1,8 +1,12 @@
 import { Box, Container, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { store } from "react-notifications-component";
+import { useDispatch, useSelector } from "react-redux";
 import categoryApi from "../../../../api/categoryApi";
 import productApi from "../../../../api/productApi";
 import Loading from "../../../../components/Loading";
+import { addCart, updateQuantity } from "../../../Cart/cartSlice";
 import Pagination from "../../components/Pagination";
 import ProductFilterCat from "../../components/ProductFilterCat";
 import ProductFilterLimit from "../../components/ProductFilterLimit";
@@ -12,6 +16,7 @@ import ProductList from "../../components/ProductList";
 function ProductListPage() {
 	const [productList, setProductList] = useState([]);
 	const [loading, setLoading] = useState(false);
+
 	const [filters, setFilters] = useState({
 		_page: 1,
 		_limit: 12,
@@ -28,6 +33,11 @@ function ProductListPage() {
 	const [categoryId, setCategoryId] = useState("");
 	const [categoryList, setCategoryList] = useState([]);
 
+	const dispatch = useDispatch();
+	const { t } = useTranslation(["cart"]);
+
+	const cartList = useSelector((state) => state.cart.list);
+
 	useEffect(() => {
 		(async () => {
 			try {
@@ -42,7 +52,7 @@ function ProductListPage() {
 	useEffect(() => {
 		(async () => {
 			try {
-				window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+				window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 				setLoading(true);
 				const { data, pagination } = await productApi.getAll(filters);
 				setProductList(data);
@@ -83,7 +93,7 @@ function ProductListPage() {
 		setFilters({
 			...filters,
 			categoryId: catId,
-			_page: 1
+			_page: 1,
 		});
 		setCategoryId(catId);
 	};
@@ -93,6 +103,43 @@ function ProductListPage() {
 		setFilters({
 			...filters,
 			_page: newPage,
+		});
+	};
+
+	const handleAddCartClick = (prod) => {
+		const newCartList = [...cartList];
+		const updateIdx = newCartList.findIndex((x) => x.prodID === prod.id);
+
+		// update quantity for exist product in cart
+		if (updateIdx >= 0) {
+			const newQuantity = newCartList[updateIdx].quantity + 1;
+			dispatch(updateQuantity({ idx: updateIdx, newQuantity }));
+		}
+
+		// add new product to cart
+		if (updateIdx < 0) {
+			dispatch(
+				addCart({
+					prodID: prod.id,
+					image: prod.images[0],
+					info: prod.name,
+					price: prod.isPromotion ? prod.salePrice : prod.originalPrice,
+					quantity: 1,
+					money: prod.isPromotion ? prod.salePrice : prod.originalPrice,
+				}),
+			);
+		}
+		store.addNotification({
+			title: `${t("cart:addCartSuccess")}!!!`,
+			message: prod.name.toUpperCase(),
+			type: "success",
+			insert: "top",
+			container: "bottom-left",
+			animationIn: ["animate__animated", "animate__fadeIn"],
+			animationOut: ["animate__animated", "animate__fadeOut"],
+			dismiss: {
+				duration: 3000,
+			},
 		});
 	};
 
@@ -121,7 +168,7 @@ function ProductListPage() {
 					</Box>
 					<Box position="relative" mt={2}>
 						{loading && <Loading />}
-						<ProductList list={productList} />
+						<ProductList list={productList} addCart={handleAddCartClick} />
 					</Box>
 					<Box pt={3} pb={5}>
 						<Pagination

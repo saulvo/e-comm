@@ -1,76 +1,64 @@
-import { Box, Container, Typography } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import { Box, Button, Container, Typography } from "@material-ui/core";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import CartList from "./components/List";
 import "./index.scss";
+import { removeItemCart } from "./cartSlice";
 
 FeatureCart.propTypes = {};
 
-const useStyles = makeStyles({
-	table: {
-		minWidth: 650,
-	},
-});
-
-function createData(name, calories, fat, carbs, protein) {
-	return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-	createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-	createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-	createData("Eclair", 262, 16.0, 24, 6.0),
-	createData("Cupcake", 305, 3.7, 67, 4.3),
-	createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 function FeatureCart(props) {
-	;
-	const { t } = useTranslation(["common"]);
-	const classes = useStyles();
+	const { t } = useTranslation(["common", "cart"]);
+	const currentLang = useSelector((state) => state.language.current);
+	const cartList = useSelector((state) => state.cart.list);
+
+	const dispatch = useDispatch();
+
+	const handleRemoveClick = (id) => {
+		dispatch(removeItemCart(id));
+	};
 
 	return (
-		<Box mt={5}>
+		<Box pt={5}>
 			<Container fixed>
-				<Box textAlign="center" mb={5} style={{ textTransform: "uppercase" }}>
+				<Box textAlign="center" pb={5} style={{ textTransform: "uppercase" }}>
 					<Typography component="h2" variant="h5">
-						{t("cart")}
+						{t("common:cart")}
 					</Typography>
 				</Box>
 
-				<TableContainer component={Paper}>
-					<Table className={classes.table} aria-label="simple table">
-						<TableHead>
-							<TableRow>
-								<TableCell>Dessert (100g serving)</TableCell>
-								<TableCell align="right">Calories</TableCell>
-								<TableCell align="right">Fat&nbsp;(g)</TableCell>
-								<TableCell align="right">Carbs&nbsp;(g)</TableCell>
-								<TableCell align="right">Protein&nbsp;(g)</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{rows.map((row) => (
-								<TableRow key={row.name}>
-									<TableCell component="th" scope="row">
-										{row.name}
-									</TableCell>
-									<TableCell align="right">{row.calories}</TableCell>
-									<TableCell align="right">{row.fat}</TableCell>
-									<TableCell align="right">{row.carbs}</TableCell>
-									<TableCell align="right">{row.protein}</TableCell>
-								</TableRow>
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
+				{cartList.length > 0 && (
+					<CartList
+						list={cartList}
+						removeClick={handleRemoveClick}
+					/>
+				)}
+				{cartList.length <= 0 && (
+					<Typography component="p" variant="body2" align="center">{`${t(
+						"cart:emptyCart",
+					)}!!!`}</Typography>
+				)}
+				<Box
+					display="flex"
+					alignItems="center"
+					justifyContent="space-between"
+					mt={5}
+					paddingLeft={3}
+					paddingRight={3}
+				>
+					<Link to={`/${currentLang}/products`}>
+						<Button variant="contained" color="primary">
+							{t("cart:shopping")}
+						</Button>
+					</Link>
+					{cartList.length > 0 && (
+						<Button variant="contained" color="secondary">
+							{t("cart:order")}
+						</Button>
+					)}
+				</Box>
 			</Container>
 		</Box>
 	);

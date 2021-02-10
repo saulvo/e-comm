@@ -10,6 +10,7 @@ import { updateLang } from "./languageSlice";
 function Header(props) {
 	const dispatch = useDispatch();
 	const currentLang = useSelector((state) => state.language.current);
+	const cartList = useSelector((state) => state.cart.list);
 	const { i18n } = useTranslation(["common"]);
 
 	useEffect(() => {
@@ -115,7 +116,7 @@ function Header(props) {
 									<li className="checkout">
 										<Link to={`/${currentLang}/cart`}>
 											<FontAwesomeIcon icon="shopping-cart" />
-											<span className="checkout__items">0</span>
+											<span className="checkout__items">{cartList.length}</span>
 										</Link>
 									</li>
 								</ul>
