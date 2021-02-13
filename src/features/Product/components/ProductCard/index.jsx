@@ -1,35 +1,42 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import ultils from "../../../../components/ultils";
+import Price from "../Price";
 import "./index.scss";
 
 ProductCard.propTypes = {
 	product: PropTypes.object.isRequired,
 	addCart: PropTypes.func,
+	cardClick: PropTypes.func,
 };
 
 ProductCard.defaultProps = {
 	addCart: null,
+	cardClick: null,
 };
 
-function ProductCard({ product, addCart }) {
-	const { t } = useTranslation(["product"]);
-	const currentLang = useSelector((state) => state.language.current);
+function ProductCard({ product, addCart, cardClick }) {
+	const { t } = useTranslation(["cart"]);
 
 	const isSale = product.salePrice === product.originalPrice;
 	const promotionPercent =
 		Math.round((100 - (product.salePrice * 100) / product.originalPrice) * 10) /
 		10;
 
-	const handleAddCartClick = (product) => {
+	const handleAddCartClick = (product, e) => {
+		e.stopPropagation();
 		if (!addCart) return;
 		addCart(product);
 	};
 
+	const handleCardClick = (id) => {
+		if (!cardClick) return;
+
+		cardClick(id);
+	};
+
 	return (
-		<div className="prod-card">
+		<div className="prod-card" onClick={() => handleCardClick(product.id)}>
 			<figure className="prod-card__thumb">
 				<img src={product.images[0]} alt={product.name} />
 				{!isSale && <span className="sale">{`-${promotionPercent}%`}</span>}
@@ -37,17 +44,18 @@ function ProductCard({ product, addCart }) {
 			<div className="prod-card__inf">
 				<h3 className="prod-card__name">{product.name}</h3>
 				<div className="prod-card__price">
-					{isSale && ultils.formatPrice(product.originalPrice, currentLang)}
+					{isSale && <Price number={product.originalPrice || 0} />}
 					{!isSale && (
 						<>
-							{ultils.formatPrice(product.salePrice, currentLang)}
-							<span>
-								{ultils.formatPrice(product.originalPrice, currentLang)}
-							</span>
+							<Price number={product.salePrice || 0} />
+							<span><Price number={product.originalPrice || 0} /></span>
 						</>
 					)}
 				</div>
-				<button className="prod-card__btn" onClick={() => handleAddCartClick(product)}>
+				<button
+					className="prod-card__btn"
+					onClick={(e) => handleAddCartClick(product, e)}
+				>
 					{t("addCart")}
 				</button>
 			</div>

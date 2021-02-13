@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -8,17 +7,17 @@ import "./index.scss";
 
 QuantityButton.propTypes = {
 	number: PropTypes.number,
-	onChange: PropTypes.func,
 	idxUpdate: PropTypes.number,
+	onChange: PropTypes.func,
 };
 
 QuantityButton.defaultProps = {
 	number: 1,
-	onChange: null,
 	idxUpdate: -1,
+	onChange: null,
 };
 
-function QuantityButton({ number, onChange, idxUpdate }) {
+function QuantityButton({ number, idxUpdate, onChange }) {
 	const [quantity, setQuantity] = useState(number);
 	const dispatch = useDispatch();
 
@@ -28,6 +27,8 @@ function QuantityButton({ number, onChange, idxUpdate }) {
 		if (idxUpdate >= 0) {
 			dispatch(updateQuantity({ idx: idxUpdate, newQuantity: quantity + 1 }));
 		}
+
+		if (onChange) onChange(quantity + 1);
 	};
 
 	const handleDecreaseClick = () => {
@@ -37,6 +38,8 @@ function QuantityButton({ number, onChange, idxUpdate }) {
 		if (idxUpdate >= 0) {
 			dispatch(updateQuantity({ idx: idxUpdate, newQuantity: quantity - 1 }));
 		}
+
+		if (onChange) onChange(quantity - 1);
 	};
 	const inputEl = useRef(quantity);
 
@@ -52,25 +55,25 @@ function QuantityButton({ number, onChange, idxUpdate }) {
 		if (idxUpdate >= 0) {
 			dispatch(updateQuantity({ idx: idxUpdate, newQuantity: quantity }));
 		}
+
+		if (onChange) onChange(quantity);
 	};
 
 	return (
-		<Box display="flex" alignItems="center" justifyContent="center">
-			<div className="quantity">
-				<button onClick={handleDecreaseClick}>
-					<FontAwesomeIcon icon="minus" />
-				</button>
-				<input
-					type="number"
-					ref={inputEl}
-					value={quantity}
-					onChange={handleInputChange}
-				/>
-				<button onClick={handleIncreaseClick}>
-					<FontAwesomeIcon icon="plus" />
-				</button>
-			</div>
-		</Box>
+		<div className="quantity">
+			<button onClick={handleDecreaseClick}>
+				<FontAwesomeIcon icon="minus" />
+			</button>
+			<input
+				type="number"
+				ref={inputEl}
+				value={quantity}
+				onChange={handleInputChange}
+			/>
+			<button onClick={handleIncreaseClick}>
+				<FontAwesomeIcon icon="plus" />
+			</button>
+		</div>
 	);
 }
 

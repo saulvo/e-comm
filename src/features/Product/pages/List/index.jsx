@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { store } from "react-notifications-component";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import categoryApi from "../../../../api/categoryApi";
 import productApi from "../../../../api/productApi";
 import Loading from "../../../../components/Loading";
@@ -33,10 +34,12 @@ function ProductListPage() {
 	const [categoryId, setCategoryId] = useState("");
 	const [categoryList, setCategoryList] = useState([]);
 
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const { t } = useTranslation(["cart"]);
 
 	const cartList = useSelector((state) => state.cart.list);
+	const currentLang = useSelector((state) => state.language.current);
 
 	useEffect(() => {
 		(async () => {
@@ -118,17 +121,19 @@ function ProductListPage() {
 
 		// add new product to cart
 		if (updateIdx < 0) {
+			const isPromotion = prod.salePrice < prod.originalPrice
 			dispatch(
 				addCart({
 					prodID: prod.id,
 					image: prod.images[0],
 					info: prod.name,
-					price: prod.isPromotion ? prod.salePrice : prod.originalPrice,
+					price: isPromotion ? prod.salePrice : prod.originalPrice,
 					quantity: 1,
-					money: prod.isPromotion ? prod.salePrice : prod.originalPrice,
+					money: isPromotion ? prod.salePrice : prod.originalPrice,
 				}),
 			);
 		}
+
 		store.addNotification({
 			title: `${t("cart:addCartSuccess")}!!!`,
 			message: prod.name.toUpperCase(),
@@ -142,6 +147,10 @@ function ProductListPage() {
 			},
 		});
 	};
+
+	const handleCardClick = (prodID) => {
+		history.push(`/${currentLang}/products/${prodID}`);
+	}
 
 	return (
 		<Container fixed>
@@ -168,7 +177,7 @@ function ProductListPage() {
 					</Box>
 					<Box position="relative" mt={2}>
 						{loading && <Loading />}
-						<ProductList list={productList} addCart={handleAddCartClick} />
+						<ProductList list={productList} addCart={handleAddCartClick} cardClick={handleCardClick}/>
 					</Box>
 					<Box pt={3} pb={5}>
 						<Pagination

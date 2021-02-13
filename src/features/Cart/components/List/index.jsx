@@ -8,17 +8,18 @@ import TableRow from "@material-ui/core/TableRow";
 import PropTypes from "prop-types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import Price from "../../../Product/components/Price";
 import CartItem from "../CartItem";
-import ultils from "../../../../components/ultils";
-import { useSelector } from "react-redux";
 
 CartList.propTypes = {
 	list: PropTypes.array.isRequired,
 	removeClick: PropTypes.func,
+	itemClick: PropTypes.func,
 };
 
 CartList.defaultProps = {
 	removeClick: null,
+	itemClick: null,
 };
 
 const useStyles = makeStyles({
@@ -39,8 +40,7 @@ const useStyles = makeStyles({
 	},
 });
 
-function CartList({ list, removeClick }) {
-	const currentLang = useSelector((state) => state.language.current);
+function CartList({ list, removeClick, itemClick }) {
 	const { t } = useTranslation(["cart"]);
 	const classes = useStyles();
 
@@ -69,7 +69,8 @@ function CartList({ list, removeClick }) {
 							itemCart={item}
 							key={idx}
 							idxUpdate={idx}
-							onClick={removeClick}
+							removeClick={removeClick}
+							itemClick={itemClick}
 						/>
 					))}
 					<TableRow>
@@ -82,13 +83,13 @@ function CartList({ list, removeClick }) {
 						<TableCell className={classes.borderNone} align="center">
 							<Typography color="secondary" component="span" variant="body1">
 								<b>
-									{
-									ultils.formatPrice(
-										list.reduce((a, b) => {
-											return a + b.money	;
-										}, 0),
-										currentLang,
-									)}
+									<Price
+										number={
+											list.reduce((a, b) => {
+												return a + b.money;
+											}, 0) || 0
+										}
+									/>
 								</b>
 							</Typography>
 						</TableCell>

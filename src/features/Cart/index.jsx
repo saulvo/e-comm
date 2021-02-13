@@ -2,7 +2,7 @@ import { Box, Button, Container, Typography } from "@material-ui/core";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import CartList from "./components/List";
 import "./index.scss";
 import { removeItemCart } from "./cartSlice";
@@ -15,10 +15,15 @@ function FeatureCart(props) {
 	const cartList = useSelector((state) => state.cart.list);
 
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const handleRemoveClick = (id) => {
 		dispatch(removeItemCart(id));
 	};
+
+	const handleItemClick = (prodID) => {
+		history.push(`/${currentLang}/products/${prodID}`);
+	}
 
 	return (
 		<Box pt={5}>
@@ -33,6 +38,7 @@ function FeatureCart(props) {
 					<CartList
 						list={cartList}
 						removeClick={handleRemoveClick}
+						itemClick={handleItemClick}
 					/>
 				)}
 				{cartList.length <= 0 && (

@@ -4,30 +4,28 @@ import { useSelector } from "react-redux";
 import { Route, useHistory, useLocation } from "react-router-dom";
 import content from "../../data/content";
 
-function RenderRoute({ component: Component, title, ...rest }) {
+function RenderRoute({ component: Component, title, path, ...rest }) {
 	const history = useHistory();
 	const location = useLocation();
 
 	const currentLang = useSelector((state) => state.language.current);
 	useEffect(() => {
-		if (location.pathname.length === 3) {
-			history.push(`/${currentLang}`);
-		} else {
-			const newUrl = location.pathname.replace(/^\/.{2}\//, `/${currentLang}/`);
-			history.push(newUrl);
+		let newUrl = `/${currentLang}`;
+
+		if (location.pathname.length !== 3) {
+			newUrl = location.pathname.replace(/^\/.{2}\//, `/${currentLang}/`);
 		}
-	}, [currentLang, location.pathname, history]);
 
+		history.push(newUrl);
+	}, [currentLang, history]);
 
-	// const currentLang = useSelector((state) => state.language.current);
 	const { t } = useTranslation(["common"]);
 
 	useEffect(() => {
 		document.title = title
 			? `${t(title)} | ${content.titlePage}`
 			: content.titlePage;
-	}, [currentLang,t,title]);
-
+	}, [currentLang, t, title]);
 
 	return (
 		<Route

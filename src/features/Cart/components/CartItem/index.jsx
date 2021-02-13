@@ -1,47 +1,67 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TableCell, TableRow } from "@material-ui/core";
+import { Box, TableCell, TableRow } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
-import { useSelector } from "react-redux";
 import QuantityButton from "../../../../components/QuantityButton";
-import ultils from "../../../../components/ultils";
+import Price from "../../../Product/components/Price";
 import "./index.scss";
 CartItem.propTypes = {
 	itemCart: PropTypes.object.isRequired,
-	onClick: PropTypes.func,
+	removeClick: PropTypes.func,
+	itemClick: PropTypes.func,
 	onChange: PropTypes.func,
 	idxUpdate: PropTypes.number,
 };
 
 CartItem.defaultProps = {
-	onClick: null,
+	removeClick: null,
+	itemClick: null,
 	onChange: null,
 	idxUpdate: -1,
 };
 
-function CartItem({ itemCart, onClick, idxUpdate }) {
-	const currentLang = useSelector((state) => state.language.current);
-
+function CartItem({ itemCart, removeClick, idxUpdate, itemClick }) {
 	const handleRemoveClick = (id) => {
-		if (!onClick) return;
+		if (!removeClick) return;
 
-		onClick(id);
+		removeClick(id);
+	};
+
+	const handleItemClick = (id) => {
+		if (!itemClick) return;
+		itemClick(id);
 	};
 
 	return (
 		<TableRow>
 			<TableCell>
-				<img src={itemCart.image} alt={itemCart.info} />
+				<Box
+					onClick={() => handleItemClick(itemCart.prodID)}
+					component="span"
+					className="cursor-pointer"
+				>
+					<img src={itemCart.image} alt={itemCart.info} />
+				</Box>
 			</TableCell>
-			<TableCell>{itemCart.info}</TableCell>
-			<TableCell align="center">
-				{ultils.formatPrice(itemCart.price, currentLang)}
+			<TableCell>
+				<Box
+					onClick={() => handleItemClick(itemCart.prodID)}
+					component="span"
+					className="cursor-pointer"
+				>
+					{itemCart.info}
+				</Box>
 			</TableCell>
 			<TableCell align="center">
-				<QuantityButton number={itemCart.quantity} idxUpdate={idxUpdate}/>
+				<Price number={itemCart.price || 0} />
 			</TableCell>
 			<TableCell align="center">
-				{ultils.formatPrice(itemCart.money, currentLang)}
+				<Box display="flex" alignItems="center" justifyContent="center">
+					<QuantityButton number={itemCart.quantity} idxUpdate={idxUpdate} />
+				</Box>
+			</TableCell>
+			<TableCell align="center">
+				<Price number={itemCart.money || 0} />
 			</TableCell>
 			<TableCell align="center">
 				<button

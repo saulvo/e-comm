@@ -8,5 +8,6 @@
   "order": "đặt hàng",
   "total": "Tổng cộng",
   "emptyCart": "Chưa có sản phẩm",
-  "addCartSuccess": "Đã thêm vào giỏ hàng"
+  "addCartSuccess": "Đã thêm vào giỏ hàng",
+  "addCart": "Thêm vào giỏ"
 }

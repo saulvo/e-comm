@@ -6,6 +6,11 @@ const productApi = {
     return axiosClient.get(url, { params });
   },
 
+  get(postId) {
+		const url = `/products/${postId}`
+		return axiosClient.get(url)
+	},
+
   add(data) {
     const url = '/products';
     return axiosClient.post(url, data);
