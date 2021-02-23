@@ -3,7 +3,7 @@ import { Container, Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import "./index.scss";
 import { updateLang } from "./languageSlice";
 
@@ -16,6 +16,8 @@ function Header(props) {
 	useEffect(() => {
 		i18n.changeLanguage(currentLang);
 	}, [i18n, currentLang]);
+
+	const params = useParams();
 
 	return (
 		<header className="header">
@@ -31,6 +33,7 @@ function Header(props) {
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<div className="header__top-right">
+								<NavLink to={`/${currentLang}/products/add-edit`} className="add-edit"><FontAwesomeIcon icon="plus" /> Add/Edit</NavLink>
 								<div className="language">
 									<div className="language__current">
 										<Trans i18nKey={`common:${currentLang}`}>English</Trans>

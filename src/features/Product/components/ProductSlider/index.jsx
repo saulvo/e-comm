@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import SliderImage from "react-zoom-slider";
 import "./index.scss";
 

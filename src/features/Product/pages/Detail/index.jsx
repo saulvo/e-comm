@@ -103,7 +103,7 @@ function ProductDetailPage() {
 	};
 
 	return (
-		<Box paddingLeft={5} paddingRight={5}>
+		<>
 			<Container fixed style={{ position: "relative" }}>
 				{loading && <Loading />}
 				<Grid container spacing={10}>
@@ -145,12 +145,10 @@ function ProductDetailPage() {
 							{t("cart:addCart")}
 						</Button>
 					</Grid>
-					<Grid item xs={12}>
-						{renderHTML(prodInfo.description || "")}
-					</Grid>
 				</Grid>
+				<Box>{renderHTML(prodInfo.description || "")}</Box>
 			</Container>
-		</Box>
+		</>
 	);
 }
 

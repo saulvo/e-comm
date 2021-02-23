@@ -10,7 +10,8 @@ import {
 	faShoppingCart,
 	faSignInAlt,
 	faTimesCircle,
-	faUserPlus
+	faUserPlus,
+	faPlug,
 } from "@fortawesome/free-solid-svg-icons";
 import { lazy, Suspense } from "react";
 import ReactNotification from "react-notifications-component";
@@ -34,6 +35,7 @@ library.add(
 	faPlus,
 	faMinus,
 	faTimesCircle,
+	faPlug,
 );
 
 const HomePage = lazy(() => import("../../features/Home"));
@@ -42,6 +44,7 @@ const PromotionFeature = lazy(() => import("../../features/Promotion"));
 const BlogFeature = lazy(() => import("../../features/Blog"));
 const ContactFeature = lazy(() => import("../../features/Contact"));
 const CartFeature = lazy(() => import("../../features/Cart"));
+
 
 function App() {
 	const match = useRouteMatch();
@@ -77,12 +80,13 @@ function App() {
 						component={CartFeature}
 						title="cart"
 					/>
+				
 					<RenderRoute component={NotFound} title="404" />
 				</Switch>
 			</Suspense>
 			<Footer />
 
-			<ReactNotification  className="top-0"/>
+			<ReactNotification className="top-0" />
 		</>
 	);
 }

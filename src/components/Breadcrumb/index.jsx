@@ -6,7 +6,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import React from "react";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
-import { NavLink, useLocation, useRouteMatch } from "react-router-dom";
+import { NavLink, useRouteMatch } from "react-router-dom";
 
 Breadcrumb.propTypes = {};
 
