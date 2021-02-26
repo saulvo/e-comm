@@ -9,9 +9,11 @@ import {
 	faSearch,
 	faShoppingCart,
 	faSignInAlt,
+	faTrash,
 	faTimesCircle,
 	faUserPlus,
 	faPlug,
+	faPencilAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { lazy, Suspense } from "react";
 import ReactNotification from "react-notifications-component";
@@ -19,7 +21,6 @@ import "react-notifications-component/dist/theme.css";
 import { Switch, useRouteMatch } from "react-router-dom";
 import Footer from "../Footer";
 import Header from "../Header";
-import NotFound from "../NotFound";
 import RenderRoute from "../RenderRoute";
 import "./index.scss";
 
@@ -36,6 +37,8 @@ library.add(
 	faMinus,
 	faTimesCircle,
 	faPlug,
+	faTrash,
+	faPencilAlt,
 );
 
 const HomePage = lazy(() => import("../../features/Home"));
@@ -44,7 +47,7 @@ const PromotionFeature = lazy(() => import("../../features/Promotion"));
 const BlogFeature = lazy(() => import("../../features/Blog"));
 const ContactFeature = lazy(() => import("../../features/Contact"));
 const CartFeature = lazy(() => import("../../features/Cart"));
-
+const NotFound = lazy(() => import("../NotFound"));
 
 function App() {
 	const match = useRouteMatch();
@@ -80,7 +83,7 @@ function App() {
 						component={CartFeature}
 						title="cart"
 					/>
-				
+
 					<RenderRoute component={NotFound} title="404" />
 				</Switch>
 			</Suspense>

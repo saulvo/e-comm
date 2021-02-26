@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -8,14 +10,19 @@ ProductCard.propTypes = {
 	product: PropTypes.object.isRequired,
 	addCart: PropTypes.func,
 	cardClick: PropTypes.func,
+	onRemove: PropTypes.func,
+	onEdit: PropTypes.func,
 };
 
 ProductCard.defaultProps = {
 	addCart: null,
 	cardClick: null,
+	onRemove: null,
+	onEdit: null,
 };
 
-function ProductCard({ product, addCart, cardClick }) {
+function ProductCard(props) {
+	const { product, addCart, cardClick, onRemove, onEdit } = props;
 	const { t } = useTranslation(["cart"]);
 
 	const isSale = product.salePrice === product.originalPrice;
@@ -25,18 +32,33 @@ function ProductCard({ product, addCart, cardClick }) {
 
 	const handleAddCartClick = (product, e) => {
 		e.stopPropagation();
-		if (!addCart) return;
-		addCart(product);
+		if (addCart) addCart(product);
 	};
 
 	const handleCardClick = (id) => {
-		if (!cardClick) return;
+		if (cardClick) cardClick(id);
+	};
 
-		cardClick(id);
+	const handleRemoveClick = (product, e) => {
+		e.stopPropagation();
+		if (onRemove) onRemove(product);
+	};
+
+	const handleEditClick = (product,e) => {
+		e.stopPropagation();
+		if (onEdit) onEdit(product);
 	};
 
 	return (
 		<div className="prod-card" onClick={() => handleCardClick(product.id)}>
+			<div className="prod-card__btns">
+				<Button onClick={(e) => handleEditClick(product, e)}>
+					<FontAwesomeIcon icon="pencil-alt" />
+				</Button>
+				<Button onClick={(e) => handleRemoveClick(product, e)}>
+					<FontAwesomeIcon icon="trash" />
+				</Button>
+			</div>
 			<figure className="prod-card__thumb">
 				<img src={product.images[0]} alt={product.name} />
 				{!isSale && <span className="sale">{`-${promotionPercent}%`}</span>}
@@ -48,7 +70,9 @@ function ProductCard({ product, addCart, cardClick }) {
 					{!isSale && (
 						<>
 							<Price number={product.salePrice || 0} />
-							<span><Price number={product.originalPrice || 0} /></span>
+							<span>
+								<Price number={product.originalPrice || 0} />
+							</span>
 						</>
 					)}
 				</div>

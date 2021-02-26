@@ -23,6 +23,9 @@
 		font-size: 0.8125rem;
 		display: inline-block;
 		cursor: pointer;
+		&:hover {
+			color: #eee;
+		}
 	}
 	.language {
 		display: inline-block;
@@ -82,6 +85,9 @@
 			}
 		}
 		&:hover {
+			.language__current {
+				color: #eee;
+			}
 			.language__selection {
 				visibility: visible;
 				opacity: 1;
@@ -106,6 +112,7 @@
 			height: 3.125rem;
 			line-height: 3.125rem;
 			font-size: 0.8125rem;
+			transition: all 0.3s;
 		}
 		&__selection {
 			list-style: none;
@@ -137,6 +144,7 @@
 					}
 					&:hover {
 						color: #b5aec4;
+						text-decoration: none;
 					}
 				}
 				&:last-child {
@@ -147,6 +155,10 @@
 			}
 		}
 		&:hover {
+			> a {
+				text-decoration: none;
+				color: #eee;
+			}
 			.account__selection {
 				visibility: visible;
 				opacity: 1;
@@ -200,6 +212,7 @@
 				transition: all 0.2s;
 				&:hover, &.active {
 					color: #b5aec4;
+					text-decoration: none;
 				}
 				&.active {
 					cursor: default;

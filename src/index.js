@@ -23,7 +23,7 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-	<React.StrictMode>
+	// <React.StrictMode>
 		<Provider store={store}>
 			<ThemeProvider theme={theme}>
 				<BrowserRouter>
@@ -38,7 +38,8 @@ ReactDOM.render(
 				</BrowserRouter>
 			</ThemeProvider>
 		</Provider>
-	</React.StrictMode>,
+	// </React.StrictMode>
+	,
 	document.getElementById("root"),
 );
 

@@ -129,7 +129,7 @@ function ProductDetailPage() {
 							)}
 						</Box>
 						<Box className={classes.desc} mt={2} mb={4} padding={2}>
-							{renderHTML(prodInfo.shortDescription || "")}
+							{renderHTML(prodInfo.shortDescription || '')}
 						</Box>
 						<Box mb={2}>
 							<QuantityButton
@@ -146,7 +146,7 @@ function ProductDetailPage() {
 						</Button>
 					</Grid>
 				</Grid>
-				<Box>{renderHTML(prodInfo.description || "")}</Box>
+				<Box>{renderHTML(prodInfo.description || '')}</Box>
 			</Container>
 		</>
 	);

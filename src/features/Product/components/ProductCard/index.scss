@@ -1,6 +1,6 @@
 .prod-card {
   display: block;
-  
+
   width: 100%;
   min-height: 340px;
   position: relative;
@@ -10,6 +10,32 @@
 
 	cursor: pointer;
 	transition: all 0.3s ease;
+
+  &__btns {
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    z-index: 9;
+
+    opacity: 0;
+    transition: all 0.3s;
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 1.8rem;
+      height: 1.8rem;
+      min-width: auto;
+      color: #fff;
+     background-color: rgba(#000,0.3);
+     border-radius: 50%;
+     margin-bottom: .5rem;
+     &:hover {
+       background-color: rgba(#000, 0.8);
+     }
+    }
+  }
 
 	&__thumb {
 		margin: 0;
@@ -60,6 +86,7 @@
     width: 100%;
 	}
 	&__name {
+    font-size: 1rem;
 		font-weight: 500;
 		line-height: 1.25rem;
     text-transform: uppercase;
@@ -110,6 +137,9 @@
 		box-shadow: 0 .625rem .625rem rgba(#000, 0.03);
 
 		.prod-card {
+      &__btns {
+        opacity: 1;
+      }
 			&__btn {
 				background-color: #fe4c50;
         &:hover {
