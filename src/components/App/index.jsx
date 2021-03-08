@@ -16,6 +16,7 @@ import {
 	faPencilAlt,
 	faBars,
 	faTimes,
+	faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { Box } from "@material-ui/core";
 import { lazy, Suspense } from "react";
@@ -44,6 +45,7 @@ library.add(
 	faPencilAlt,
 	faBars,
 	faTimes,
+	faSignOutAlt,
 );
 
 const HomePage = lazy(() => import("../../features/Home"));

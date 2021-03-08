@@ -1,13 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, Container, Grid, Hidden } from "@material-ui/core";
+import { Avatar, Box, Container, Grid, Hidden } from "@material-ui/core";
 import classNames from "classnames";
+import firebase from "firebase/app";
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import productApi from "../../api/productApi";
+import { auth } from "../../app/firebase";
 import ProductForm from "../../features/Product/components/ProductForm";
 import { useScollTop } from "../../hooks/useScollTop";
+import { updateUser } from "./authSlice";
 import "./index.scss";
 import { updateLang } from "./languageSlice";
 
@@ -52,6 +56,36 @@ function Header(props) {
 	};
 
 	const scrollTop = useScollTop();
+
+	const [user] = useAuthState(auth);
+	const handleSigninClick = async () => {
+		try {
+			const provider = new firebase.auth.GoogleAuthProvider();
+			await auth.signInWithPopup(provider);
+		} catch (error) {
+			console.log("Sign in failed...", error);
+		}
+	};
+	const handleSignOutClick = () => {
+		auth.signOut();
+		dispatch(updateUser({}));
+	};
+
+	useEffect(() => {
+		(() => {
+			if (user)
+				dispatch(
+					updateUser({
+						name: user.displayName,
+						email: user.email,
+						photo: user.photoURL
+					}),
+				);
+		})();
+	}, [user]);
+
+	const userTest = useSelector((state) => state.auth.user);
+	console.log(userTest);
 
 	return (
 		<>
@@ -103,21 +137,31 @@ function Header(props) {
 
 									<div className="account">
 										<Link to="#">
-											<Trans i18nKey="common:account">My Account</Trans>
+											{user && <Box display="flex" alignItems="center">
+												<Avatar className="avatar" alt="Remy Sharp" src={user.photoURL}/>
+												<Box ml={1}>{user.displayName}</Box>
+											</Box>}
+											{!user && (
+												<Trans i18nKey="common:account">My Account</Trans>
+											)}
 										</Link>
 										<ul className="account__selection">
-											<li>
-												<Link to="#">
-													<FontAwesomeIcon icon="sign-in-alt" />
-													<Trans i18nKey="common:signin">Sign In</Trans>
-												</Link>
-											</li>
-											<li>
-												<Link to="#">
-													<FontAwesomeIcon icon="user-plus" />
-													<Trans i18nKey="common:register">Register</Trans>
-												</Link>
-											</li>
+											{!user && (
+												<li>
+													<span onClick={handleSigninClick}>
+														<FontAwesomeIcon icon="sign-in-alt" />
+														<Trans i18nKey="common:signin">Sign In</Trans>
+													</span>
+												</li>
+											)}
+											{user && (
+												<li>
+													<span onClick={handleSignOutClick}>
+														<FontAwesomeIcon icon="sign-out-alt" />
+														<Trans i18nKey="common:signout">Sign Out</Trans>
+													</span>
+												</li>
+											)}
 										</ul>
 									</div>
 								</div>
