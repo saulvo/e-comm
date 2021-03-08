@@ -14,7 +14,10 @@ import {
 	faUserPlus,
 	faPlug,
 	faPencilAlt,
+	faBars,
+	faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import { Box } from "@material-ui/core";
 import { lazy, Suspense } from "react";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
@@ -39,6 +42,8 @@ library.add(
 	faPlug,
 	faTrash,
 	faPencilAlt,
+	faBars,
+	faTimes,
 );
 
 const HomePage = lazy(() => import("../../features/Home"));
@@ -55,38 +60,40 @@ function App() {
 	return (
 		<>
 			<Header />
-			<Suspense fallback={<div>Loading...</div>}>
-				<Switch>
-					<RenderRoute exact path={match.path} component={HomePage} />
-					<RenderRoute
-						path={`${match.path}/products`}
-						component={ProductFeature}
-						title="products"
-					/>
-					<RenderRoute
-						path={`${match.path}/promotion`}
-						component={PromotionFeature}
-						title="promotion"
-					/>
-					<RenderRoute
-						path={`${match.path}/blog`}
-						component={BlogFeature}
-						title="blog"
-					/>
-					<RenderRoute
-						path={`${match.path}/contact`}
-						component={ContactFeature}
-						title="contact"
-					/>
-					<RenderRoute
-						path={`${match.path}/cart`}
-						component={CartFeature}
-						title="cart"
-					/>
+			<Box className="main" paddingTop="150px">
+				<Suspense fallback={<div>Loading...</div>}>
+					<Switch>
+						<RenderRoute exact path={match.path} component={HomePage} />
+						<RenderRoute
+							path={`${match.path}/products`}
+							component={ProductFeature}
+							title="products"
+						/>
+						<RenderRoute
+							path={`${match.path}/promotion`}
+							component={PromotionFeature}
+							title="promotion"
+						/>
+						<RenderRoute
+							path={`${match.path}/blog`}
+							component={BlogFeature}
+							title="blog"
+						/>
+						<RenderRoute
+							path={`${match.path}/contact`}
+							component={ContactFeature}
+							title="contact"
+						/>
+						<RenderRoute
+							path={`${match.path}/cart`}
+							component={CartFeature}
+							title="cart"
+						/>
 
-					<RenderRoute component={NotFound} title="404" />
-				</Switch>
-			</Suspense>
+						<RenderRoute component={NotFound} title="404" />
+					</Switch>
+				</Suspense>
+			</Box>
 			<Footer />
 
 			<ReactNotification className="top-0" />

@@ -1,11 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, Container, Grid } from "@material-ui/core";
+import { Box, Container, Grid, Hidden } from "@material-ui/core";
+import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import productApi from "../../api/productApi";
 import ProductForm from "../../features/Product/components/ProductForm";
+import { useScollTop } from "../../hooks/useScollTop";
 import "./index.scss";
 import { updateLang } from "./languageSlice";
 
@@ -15,6 +17,7 @@ function Header(props) {
 	const cartList = useSelector((state) => state.cart.list);
 	const { i18n } = useTranslation(["common", "product"]);
 	const [showForm, setShowForm] = useState(false);
+	const [showMenu, setShowMenu] = useState(false);
 
 	useEffect(() => {
 		i18n.changeLanguage(currentLang);
@@ -48,24 +51,31 @@ function Header(props) {
 		}
 	};
 
+	const scrollTop = useScollTop();
+
 	return (
 		<>
-			<header className="header">
+			<header className={`header ${classNames({ fixed: scrollTop > 0 })}`}>
 				<div className="header__top">
 					<Container fixed>
 						<Grid container spacing={0}>
-							<Grid item xs={12} sm={6}>
-								<div className="header__top-left">
-									<Trans i18nKey="common:header_slogan">
-										free shipping on all u.s orders over $50
-									</Trans>
-								</div>
-							</Grid>
-							<Grid item xs={12} sm={6}>
+							<Hidden mdDown>
+								<Grid item xs={12} sm={6}>
+									<div className="header__top-left">
+										<Trans i18nKey="common:header_slogan">
+											free shipping on all u.s orders over $50
+										</Trans>
+									</div>
+								</Grid>
+							</Hidden>
+
+							<Grid item xs={12} md={6}>
 								<div className="header__top-right">
 									<div className="add-edit" onClick={() => setShowForm(true)}>
 										<FontAwesomeIcon icon="plus" />
-										<Box marginLeft="0.2rem" component="span"><Trans i18nKey="product:addProduct"></Trans></Box>
+										<Box marginLeft="0.2rem" component="span">
+											<Trans i18nKey="product:addProduct"></Trans>
+										</Box>
 									</div>
 									<div className="language">
 										<div className="language__current">
@@ -125,7 +135,15 @@ function Header(props) {
 									</NavLink>
 								</div>
 								<nav className="navbar">
-									<div className="navbar__menu">
+									<div
+										className={`navbar__menu ${classNames({ show: showMenu })}`}
+									>
+										<button
+											className="navbar__btn-close"
+											onClick={() => setShowMenu(false)}
+										>
+											<FontAwesomeIcon icon="times" />
+										</button>
 										<NavLink exact to={`/${currentLang}`}>
 											<Trans i18nKey="common:home">Home</Trans>
 										</NavLink>
@@ -156,6 +174,14 @@ function Header(props) {
 													{cartList.length}
 												</span>
 											</Link>
+										</li>
+										<li>
+											<button
+												className="navbar__btn-menu"
+												onClick={() => setShowMenu(true)}
+											>
+												<FontAwesomeIcon icon="bars" />
+											</button>
 										</li>
 									</ul>
 								</nav>
