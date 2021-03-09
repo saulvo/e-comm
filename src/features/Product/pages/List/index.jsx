@@ -67,7 +67,7 @@ function ProductListPage() {
 				setProductList(data);
 				setPagination(pagination);
 			} catch (error) {
-				
+
 				console.log("Fail to fetch product list:", error);
 			}
 			setLoading(false);
@@ -269,7 +269,6 @@ function ProductListPage() {
 								list={productList}
 								addCart={handleAddCartClick}
 								cardClick={handleCardClick}
-								onRemove={handleOnRemoveClick}
 								onRemove={handleOnRemoveClick}
 								onEdit={handleOnEditClick}
 							/>

@@ -17,6 +17,7 @@ function RenderRoute({ component: Component, title, path, ...rest }) {
 		}
 
 		history.push(newUrl);
+
 	}, [currentLang, history]);
 
 	const { t } = useTranslation(["common"]);

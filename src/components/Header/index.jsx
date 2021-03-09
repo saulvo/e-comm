@@ -82,10 +82,7 @@ function Header(props) {
 					}),
 				);
 		})();
-	}, [user]);
-
-	const userTest = useSelector((state) => state.auth.user);
-	console.log(userTest);
+	}, [user, dispatch]);
 
 	return (
 		<>
