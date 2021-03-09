@@ -23,7 +23,7 @@ function ProductFilterSort({ onChange, sorts, loading }) {
 		onChange(e.currentTarget.dataset.value);
 	};
 	return (
-		<div className="custom-select">
+		<div className="p-select">
 			<span>{t(selected)}</span>
 			<FontAwesomeIcon icon="angle-down" className="icon" />
 			{!loading && (

@@ -23,7 +23,7 @@ function ProductFilterLimit({ onChange, limits, loading }) {
 		onChange(e.currentTarget.dataset.value);
 	};
 	return (
-		<div className="custom-select">
+		<div className="p-select">
 			<span>
 				{t('show')}
 				&nbsp;{selected}
